@@ -33,4 +33,13 @@ public class StringCalculatorTest {
 		assertEquals(15, stringCalculator.Add("7,8"));
 		assertEquals(199, stringCalculator.Add("99,100"));
 	}	
+	
+	// test cases for multiple numbers
+	@Test
+	public void sumOfMultipleNumbers() {
+		assertEquals(6, stringCalculator.Add("1,2,3"));
+		assertEquals(55, stringCalculator.Add("1,2,3,4,5,6,7,8,9,10"));
+		assertEquals(52, stringCalculator.Add("13,13,13,13"));
+		assertEquals(12333, stringCalculator.Add("111,1111,11111"));
+	}	
 }
