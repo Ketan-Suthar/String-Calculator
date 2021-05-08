@@ -11,4 +11,16 @@ public class HelperFunctions
 	{
 		return (string == null || string.isEmpty()) ? true : false;
 	}
+	
+	public static int getIntegerValue(String number)
+	{
+		try
+		{
+			return number != null ? (int)Double.parseDouble(number.toString()) : 0;
+		}
+		catch(NumberFormatException e)
+		{
+			return 0;
+		}
+	}
 }

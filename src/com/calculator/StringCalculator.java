@@ -11,6 +11,7 @@ public class StringCalculator {
 		int sum = 0; // to store sum of passed numbers
 		if(HelperFunctions.isNullOrEmpty(numbers))
 			return sum;
+		sum = HelperFunctions.getIntegerValue(numbers);
 		return sum;
 	}
 }
