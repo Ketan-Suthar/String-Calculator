@@ -41,19 +41,34 @@ public class StringCalculator {
 		// now first split the numbers string based on delimiter
 		String[] numbersInInt = HelperFunctions.splitStirng(numbers, delimiter);
 		
+		// to stores all negative number
+		String negativeNumbers = "";
+		
 		// go through each number, convert them to integer and add them to sum
 		for(String number: numbersInInt)
-		{
-			try {
-				int currentNumber = HelperFunctions.getIntegerValue(number);
-				if(currentNumber < 0)
-					throw new Exception("negatives not allowed: " + currentNumber);
-				sum += currentNumber;
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				return 0;
+		{	
+			// convert current number from string to integer, so we can add it to sum 
+			int currentNumber = HelperFunctions.getIntegerValue(number);
+			// checking if currnetNumber is negative or not
+			if(currentNumber < 0)
+			{
+				// if no negative number has been encountered till now then simply assign it to negativeNumbers
+				// other wise add current number to negativeNumbers separated using comma
+				negativeNumbers += HelperFunctions.isNullOrEmpty(negativeNumbers) ? 
+						number : "," + number;
 			}
+			sum += currentNumber;
 		}
+		// if negativeNumbers is not empty then, raise the exception and return 0
+		try {
+			// negativeNumbers is not empty then we there must be at least one negative number in numbeers passed
+			if(!HelperFunctions.isNullOrEmpty(negativeNumbers))
+				throw new Exception("negatives not allowed: " + negativeNumbers);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return 0; // Returning 0 because be encountered negative numbers
+		}
+		// if numbers not contains any negative number then just return the sum of numbers
 		return sum;
 	}
 }
