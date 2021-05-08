@@ -2,18 +2,21 @@ package com.calculator;
 
 public class StringCalculator {
 	
+	// to stored how many times Add method is called
+	static int timesAddCalled = 0;
+	public StringCalculator()
+	{
+		// just wanted to check how many time Junit is creating contructor
+		System.out.println("\nStringCalculator: Default contructor called");
+	}
 	/*
 	 * add method takes list of number as string(comma separated values)
 	 * and return sum of all number
 	 */
-	int timeAddCalled = 0;
-	public StringCalculator()
-	{
-		System.out.println("\nStringCalculator: Default contructor called");
-	}
 	public int Add(String numbers)
 	{
-		++timeAddCalled;
+		// each time Add method is called increament the count
+		++timesAddCalled;
 		int sum = 0; // to store sum of passed numbers
 		// if numbers string is null or empty than return 0
 		if(HelperFunctions.isNullOrEmpty(numbers))
@@ -78,8 +81,9 @@ public class StringCalculator {
 		return sum;
 	}
 	
-	public int GetCalledCount()
+	// to get the numbers of the time Add method is called
+	public static int GetCalledCount()
 	{
-		return timeAddCalled;
+		return timesAddCalled;
 	}
 }

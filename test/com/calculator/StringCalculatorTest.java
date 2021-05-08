@@ -2,6 +2,7 @@ package com.calculator;
 
 import static org.junit.Assert.*;
 
+import org.junit.AfterClass;
 import org.junit.Test;
 
 /*
@@ -82,17 +83,9 @@ public class StringCalculatorTest {
 		assertEquals(0, stringCalculator.Add("//~\n-111~-34~-11111"));
 	}
 	
-	// test cases for checking if GetCalledCount is returning correct number or not
-	@Test
-	public void numberOfTimeAddCalled() {
-		// since Junit is creating new object of StringCalculator for each method
-		// count is start from 0
-		assertEquals(0, stringCalculator.GetCalledCount());
-		stringCalculator.Add("1");
-		assertEquals(1, stringCalculator.GetCalledCount());
-		stringCalculator.Add("1");
-		assertEquals(2, stringCalculator.GetCalledCount());
-		stringCalculator.Add("1");
-		assertEquals(3, stringCalculator.GetCalledCount());
+	@AfterClass
+	public static void numberOfTimeAddCalledAfterAllMethodCall() {
+		System.out.println("\n@AfterClass method checking how many times Add method called in testing");
+		assertEquals(26, StringCalculator.GetCalledCount());
 	}
 }
