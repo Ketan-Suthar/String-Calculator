@@ -43,8 +43,17 @@ public class StringCalculator {
 		
 		// go through each number, convert them to integer and add them to sum
 		for(String number: numbersInInt)
-			sum += HelperFunctions.getIntegerValue(number);
-		
+		{
+			try {
+				int currentNumber = HelperFunctions.getIntegerValue(number);
+				if(currentNumber < 0)
+					throw new Exception("negatives not allowed: " + currentNumber);
+				sum += currentNumber;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				return 0;
+			}
+		}
 		return sum;
 	}
 }
