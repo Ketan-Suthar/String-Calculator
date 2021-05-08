@@ -7,7 +7,7 @@ public class StringCalculator {
 	public StringCalculator()
 	{
 		// just wanted to check how many time Junit is creating contructor
-		System.out.println("\nStringCalculator: Default contructor called");
+		// System.out.println("\nStringCalculator: Default contructor called");
 	}
 	/*
 	 * add method takes list of number as string(comma separated values)
@@ -21,40 +21,24 @@ public class StringCalculator {
 		// if numbers string is null or empty than return 0
 		if(HelperFunctions.isNullOrEmpty(numbers))
 			return sum;
+	
+		String[] splitedNummber = {};
 		
-		// numbers may contain comma and \n as delimiter, first convert all \n
-		// to comma so that we can split string based on comma in just one go
-		
-		// setting default delimiter as comma
-		String delimiter = ",|\n";
-		
-		/*
-		 * numbers string is separated by delimiter D
-		 * D is the delimiter in starting of the string after double slash (//D)
-		 * and numbers start from the next line separated by delimeter D
-		 * example //[delimiter]\n[numbers…]
-		 * like: //;\n1;2
-		 * 
-		 * so first check if delimiter is specified in the numbers or not
-		 */
-		if(numbers.matches("//(.*)\n(.*)")){
-			// if delimiter is specified in starting of the string 
-			// set the new value of delimiter
-			delimiter = Character.toString(numbers.charAt(2));
-			delimiter = delimiter + "|\n";
-			// now we only need the numbers starting from the new line 
-			// from the 4th character after //D\n
-			numbers = numbers.substring(4);
+		// if numbers start with // then we need to extract delimiter 
+		if(numbers.startsWith("//"))
+		{
+			// findDelimiter will return delimiter from given string
+			// which must start from // and delimiter should be in bracket []
+			splitedNummber = getNumbers(numbers);
 		}
-
-		// now first split the numbers string based on delimiter
-		String[] numbersInInt = HelperFunctions.splitStirng(numbers, delimiter);
-		
+		else
+			splitedNummber = HelperFunctions.splitStirng(numbers, ",|\n");
+		System.out.println("\nnumbers: " + numbers);
 		// to stores all negative number
 		String negativeNumbers = "";
 		
 		// go through each number, convert them to integer and add them to sum
-		for(String number: numbersInInt)
+		for(String number: splitedNummber)
 		{	
 			// convert current number from string to integer, so we can add it to sum 
 			int currentNumber = HelperFunctions.getIntegerValue(number);
@@ -81,6 +65,60 @@ public class StringCalculator {
 		}
 		// if numbers not contains any negative number then just return the sum of numbers
 		return sum;
+	}
+	
+	public String[] getNumbers(String numbers)
+	{
+		//NOTE: SINCE WE ARE IN THIS FUNCTION WE ARE SURE THAR NUMBERS CONTAIN CUSTOME DELIMITER
+		
+		String delimiter = ""; // to store the delimiter
+		
+		// since delimiter can be of any length we need to find starting position from where numbers will start
+		int numbersStartFrom = 0;
+		
+		/*
+		 * numbers string is separated by delimiter D (D is fixed char but with any length)
+		 * D is the delimiter in starting of the string after double slash (//[D])
+		 * and numbers start from the next line separated by delimiter D
+		 * example //[delimiter]\n[numbers…]
+		 * like: //[***]\n1***2
+		 * or like //;\n1;2
+		 *
+		 * so delimiter simply can be of 1 length or multiple length but in square braces
+		 */
+		// character at 3rd position is [ we're need to loop through it to check how many characters delimiter has
+		if(numbers.charAt(2) == '[')
+		{
+			for(int index = 3; numbers.charAt(index) != ']' ; ++index, numbersStartFrom = index)
+			{
+				String character = Character.toString(numbers.charAt(index));
+				if(character.equals("+") || character.equals("*") || character.equals("^"))
+					character = "\\" + character;
+				delimiter = delimiter + character;
+			}
+			// since numbers will start after newline after ending of the delimiter list we need to
+			// Increment numbersStartFrom by 2
+			numbersStartFrom+=2;
+		}
+		else
+		{
+			// if character at 3rd position is not [ then, it only contains single length delimiter
+			delimiter = Character.toString(numbers.charAt(2));
+			numbersStartFrom = 4;
+		}
+		// apart from delimiter we are making sure that number can also be in newlines 
+		delimiter = delimiter + "|\n";
+		
+		System.out.println("\ndelimiter: " + delimiter);
+		System.out.println("\nnumbersStartFrom: " + numbersStartFrom);
+		
+		// actual numbers start from first after delimiter specification which are storing in numbersStartFrom
+		numbers = numbers.substring(numbersStartFrom);
+
+		System.out.println("\nnumbers: " + numbers);
+		// now we have numbers and delimiter just numbers using delimiter and return
+		String[] splitedNummber = HelperFunctions.splitStirng(numbers, delimiter);
+		return splitedNummber;
 	}
 	
 	// to get the numbers of the time Add method is called
