@@ -9,6 +9,8 @@ public class StringCalculator {
 	public int Add(String numbers)
 	{
 		int sum = 0; // to store sum of passed numbers
+		if(HelperFunctions.isNullOrEmpty(numbers))
+			return sum;
 		return sum;
 	}
 }
