@@ -12,6 +12,7 @@ public class StringCalculatorTest {
 	StringCalculator stringCalculator = new StringCalculator();
 	
 	// test case for empty and null string
+	
 	@Test
 	public void sumOfEmptyString() {
 		assertEquals(0, stringCalculator.Add(""));
@@ -50,5 +51,16 @@ public class StringCalculatorTest {
 		assertEquals(55, stringCalculator.Add("1,2,3,4\n5,6,7\n8,9\n10"));
 		assertEquals(52, stringCalculator.Add("13\n13,13\n13"));
 		assertEquals(12333, stringCalculator.Add("111\n1111\n11111"));
-	}	
+	}
+	
+	// test cases for number with comma and \n as delimiter
+	@Test
+	public void sumOfNumbersWithDifferentDelimiters() {
+		// case with default delimiter
+		assertEquals(6, stringCalculator.Add("1,2,3"));
+		// cases with different delimiters specified in begging of the string
+		assertEquals(55, stringCalculator.Add("//;\n1;2;3;4;5;6;7;8;9;10"));
+		assertEquals(52, stringCalculator.Add("//@\n13@13@13@13"));
+		assertEquals(12333, stringCalculator.Add("//~\n111~1111~11111"));
+	}
 }

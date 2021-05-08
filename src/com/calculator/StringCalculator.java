@@ -15,10 +15,31 @@ public class StringCalculator {
 		
 		// numbers may contain comma and \n as delimiter, first convert all \n
 		// to comma so that we can split string based on comma in just one go
-		numbers = numbers.replaceAll("\\n", ",");
 		
-		// now first split the numbers string based on comma(',') and store them
-		String[] numbersInInt = HelperFunctions.splitStirng(numbers, ",");
+		// setting default delimiter as comma
+		String delimiter = ",|\n";
+		
+		/*
+		 * numbers string is separated by delimiter D
+		 * D is the delimiter in starting of the string after double slash (//D)
+		 * and numbers start from the next line separated by delimeter D
+		 * example //[delimiter]\n[numbers…]
+		 * like: //;\n1;2
+		 * 
+		 * so first check if delimiter is specified in the numbers or not
+		 */
+		if(numbers.matches("//(.*)\n(.*)")){
+			// if delimiter is specified in starting of the string 
+			// set the new value of delimiter
+			delimiter = Character.toString(numbers.charAt(2));
+			delimiter = delimiter + "|\n";
+			// now we only need the numbers starting from the new line 
+			// from the 4th character after //D\n
+			numbers = numbers.substring(4);
+		}
+
+		// now first split the numbers string based on delimiter
+		String[] numbersInInt = HelperFunctions.splitStirng(numbers, delimiter);
 		
 		// go through each number, convert them to integer and add them to sum
 		for(String number: numbersInInt)
