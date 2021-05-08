@@ -66,6 +66,8 @@ public class StringCalculator {
 				negativeNumbers += HelperFunctions.isNullOrEmpty(negativeNumbers) ? 
 						number : "," + number;
 			}
+			else if(currentNumber > 1000)
+				continue;
 			sum += currentNumber;
 		}
 		// if negativeNumbers is not empty then, raise the exception and return 0

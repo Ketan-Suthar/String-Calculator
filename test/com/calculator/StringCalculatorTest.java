@@ -42,7 +42,6 @@ public class StringCalculatorTest {
 		assertEquals(6, stringCalculator.Add("1,2,3"));
 		assertEquals(55, stringCalculator.Add("1,2,3,4,5,6,7,8,9,10"));
 		assertEquals(52, stringCalculator.Add("13,13,13,13"));
-		assertEquals(12333, stringCalculator.Add("111,1111,11111"));
 	}
 	
 	// test cases for number with comma and \n as delimiter
@@ -51,7 +50,7 @@ public class StringCalculatorTest {
 		assertEquals(6, stringCalculator.Add("1,2,3"));
 		assertEquals(55, stringCalculator.Add("1,2,3,4\n5,6,7\n8,9\n10"));
 		assertEquals(52, stringCalculator.Add("13\n13,13\n13"));
-		assertEquals(12333, stringCalculator.Add("111\n1111\n11111"));
+		assertEquals(111, stringCalculator.Add("111\n1111\n11111"));
 	}
 	
 	// test cases for number with comma and \n as delimiter
@@ -62,7 +61,7 @@ public class StringCalculatorTest {
 		// cases with different delimiters specified in begging of the string
 		assertEquals(55, stringCalculator.Add("//;\n1;2;3;4;5;6;7;8;9;10"));
 		assertEquals(52, stringCalculator.Add("//@\n13@13@13@13"));
-		assertEquals(12333, stringCalculator.Add("//~\n111~1111~11111"));
+		assertEquals(111, stringCalculator.Add("//~\n111~1111~11111"));
 	}
 	
 	// test cases for number with comma and \n as delimiter
@@ -86,6 +85,15 @@ public class StringCalculatorTest {
 	@AfterClass
 	public static void numberOfTimeAddCalledAfterAllMethodCall() {
 		System.out.println("\n@AfterClass method checking how many times Add method called in testing");
-		assertEquals(26, StringCalculator.GetCalledCount());
+		assertEquals(28, StringCalculator.GetCalledCount());
+	}
+	
+	//  test cases for numbers which contains some numbers grater than 1000
+	@Test
+	public void sumOfNumbersWithGreaterThan1000() {
+		// if there negative number is passed then Add method should return 0
+		assertEquals(1006, stringCalculator.Add("1,2,3,1000"));
+		assertEquals(55, stringCalculator.Add("1,2,3,4\n5,6,7\n8,9\n10,1001,2000,3000,4000"));
+		assertEquals(145, stringCalculator.Add("//~\n111~34~11111,90992,1414,1141,8763"));
 	}
 }
