@@ -89,16 +89,16 @@ public class StringCalculator {
 		// character at 3rd position is [ we're need to loop through it to check how many characters delimiter has
 		if(numbers.charAt(2) == '[')
 		{
-			for(int index = 3; numbers.charAt(index) != ']' ; ++index, numbersStartFrom = index)
+			for(int index = 2; numbers.charAt(index) == '[' ; index+=3, numbersStartFrom = index)
 			{
-				String character = Character.toString(numbers.charAt(index));
+				String character = Character.toString(numbers.charAt(index+1));
 				if(character.equals("+") || character.equals("*") || character.equals("^"))
 					character = "\\" + character;
-				delimiter = delimiter + character;
+				delimiter += HelperFunctions.isNullOrEmpty(delimiter) ? character : ("|" + character);
 			}
 			// since numbers will start after newline after ending of the delimiter list we need to
 			// Increment numbersStartFrom by 2
-			numbersStartFrom+=2;
+			numbersStartFrom+=1;
 		}
 		else
 		{

@@ -98,11 +98,19 @@ public class StringCalculatorTest {
 	}
 	
 	
+//	//  test cases for numbers with delimiter of any length
+//	@Test
+//	public void sumOfNumbersWithDelimiterOfAnyLength() {
+//		assertEquals(1006, stringCalculator.Add("//[***]\n1***2***3***1000"));
+//		assertEquals(10, stringCalculator.Add("//[,,,]\n1,,,2,,,3,,,4"));
+//		assertEquals(155, stringCalculator.Add("//[~~~~~~]\n111~~~~~~34~~~~~~10"));
+//	}
+	
 	//  test cases for numbers with delimiter of any length
 	@Test
-	public void sumOfNumbersWithDelimiterOfAnyLength() {
-		assertEquals(1006, stringCalculator.Add("//[***]\n1***2***3***1000"));
-		assertEquals(10, stringCalculator.Add("//[,,,]\n1,,,2,,,3,,,4"));
-		assertEquals(155, stringCalculator.Add("//[~~~~~~]\n111~~~~~~34~~~~~~10"));
+	public void sumOfNumbersWithMultipleDelimiterOfSingleLength() {
+		assertEquals(1006, stringCalculator.Add("//[*][~]\n1*2~3~1000"));
+		assertEquals(10, stringCalculator.Add("//[,][%]\n1,2%3,4"));
+		assertEquals(155, stringCalculator.Add("//[~]\n111~34~10"));
 	}
 }
