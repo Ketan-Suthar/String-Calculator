@@ -25,4 +25,12 @@ public class StringCalculatorTest {
 		assertEquals(123, stringCalculator.Add("123"));
 		assertEquals(99, stringCalculator.Add("99"));
 	}
+	
+	// test cases for two numbers
+	@Test
+	public void sumOfTwoNumbers() {
+		assertEquals(3, stringCalculator.Add("1,2"));
+		assertEquals(15, stringCalculator.Add("7,8"));
+		assertEquals(199, stringCalculator.Add("99,100"));
+	}	
 }
