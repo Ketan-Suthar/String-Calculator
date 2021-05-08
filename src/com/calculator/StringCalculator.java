@@ -13,6 +13,10 @@ public class StringCalculator {
 		if(HelperFunctions.isNullOrEmpty(numbers))
 			return sum;
 		
+		// numbers may contain comma and \n as delimiter, first convert all \n
+		// to comma so that we can split string based on comma in just one go
+		numbers = numbers.replaceAll("\\n", ",");
+		
 		// now first split the numbers string based on comma(',') and store them
 		String[] numbersInInt = HelperFunctions.splitStirng(numbers, ",");
 		

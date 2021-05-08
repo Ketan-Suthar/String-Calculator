@@ -41,5 +41,14 @@ public class StringCalculatorTest {
 		assertEquals(55, stringCalculator.Add("1,2,3,4,5,6,7,8,9,10"));
 		assertEquals(52, stringCalculator.Add("13,13,13,13"));
 		assertEquals(12333, stringCalculator.Add("111,1111,11111"));
+	}
+	
+	// test cases for number with comma and \n as delimiter
+	@Test
+	public void sumOfNumbersWithNewlineAndComma() {
+		assertEquals(6, stringCalculator.Add("1,2,3"));
+		assertEquals(55, stringCalculator.Add("1,2,3,4\n5,6,7\n8,9\n10"));
+		assertEquals(52, stringCalculator.Add("13\n13,13\n13"));
+		assertEquals(12333, stringCalculator.Add("111\n1111\n11111"));
 	}	
 }
