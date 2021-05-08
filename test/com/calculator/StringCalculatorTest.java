@@ -81,4 +81,10 @@ public class StringCalculatorTest {
 		assertEquals(0, stringCalculator.Add("-1,2,-3,4\n5,-6,7\n8,9\n-10"));
 		assertEquals(0, stringCalculator.Add("//~\n-111~-34~-11111"));
 	}
+	
+	@Test
+	public void numberOfTimeAddCalled() {
+		// if there negative number is passed then Add method should return 0
+		assertEquals(25, stringCalculator.GetCalledCount());
+	}
 }

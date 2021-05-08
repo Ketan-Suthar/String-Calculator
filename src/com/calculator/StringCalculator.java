@@ -6,8 +6,11 @@ public class StringCalculator {
 	 * add method takes list of number as string(comma separated values)
 	 * and return sum of all number
 	 */
+	int timeAddCalled = 0;
+	
 	public int Add(String numbers)
 	{
+		++timeAddCalled;
 		int sum = 0; // to store sum of passed numbers
 		// if numbers string is null or empty than return 0
 		if(HelperFunctions.isNullOrEmpty(numbers))
@@ -70,5 +73,10 @@ public class StringCalculator {
 		}
 		// if numbers not contains any negative number then just return the sum of numbers
 		return sum;
+	}
+	
+	public int GetCalledCount()
+	{
+		return timeAddCalled;
 	}
 }
