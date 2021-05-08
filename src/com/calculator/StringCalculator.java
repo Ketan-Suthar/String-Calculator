@@ -7,7 +7,10 @@ public class StringCalculator {
 	 * and return sum of all number
 	 */
 	int timeAddCalled = 0;
-	
+	public StringCalculator()
+	{
+		System.out.println("\nStringCalculator: Default contructor called");
+	}
 	public int Add(String numbers)
 	{
 		++timeAddCalled;

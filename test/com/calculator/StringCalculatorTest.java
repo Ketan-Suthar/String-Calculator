@@ -82,9 +82,17 @@ public class StringCalculatorTest {
 		assertEquals(0, stringCalculator.Add("//~\n-111~-34~-11111"));
 	}
 	
+	// test cases for checking if GetCalledCount is returning correct number or not
 	@Test
 	public void numberOfTimeAddCalled() {
-		// if there negative number is passed then Add method should return 0
-		assertEquals(25, stringCalculator.GetCalledCount());
+		// since Junit is creating new object of StringCalculator for each method
+		// count is start from 0
+		assertEquals(0, stringCalculator.GetCalledCount());
+		stringCalculator.Add("1");
+		assertEquals(1, stringCalculator.GetCalledCount());
+		stringCalculator.Add("1");
+		assertEquals(2, stringCalculator.GetCalledCount());
+		stringCalculator.Add("1");
+		assertEquals(3, stringCalculator.GetCalledCount());
 	}
 }
